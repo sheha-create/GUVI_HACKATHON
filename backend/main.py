@@ -17,6 +17,24 @@ from dotenv import load_dotenv
 # Load environment variables from .env file
 load_dotenv()
 
+# Get frontend URL from environment for CORS
+FRONTEND_URL = os.getenv('FRONTEND_URL', 'http://localhost:3000')
+RENDER_EXTERNAL_URL = os.getenv('RENDER_EXTERNAL_URL', '')
+
+# Build list of allowed origins
+allowed_origins = [
+    "http://localhost:3000",
+    "http://localhost:3001",
+    "http://localhost:3002",
+    "http://localhost:5173",
+    "http://127.0.0.1:3000",
+    FRONTEND_URL
+]
+
+# Add Render external URL if available
+if RENDER_EXTERNAL_URL:
+    allowed_origins.append(RENDER_EXTERNAL_URL)
+
 from utils.parser import parse_document, validate_file_type
 from utils.ai_extractor import process_document
 
@@ -27,14 +45,14 @@ logger = logging.getLogger(__name__)
 # Initialize FastAPI app
 app = FastAPI(
     title="AI Document Analysis API",
-    description="Extract and analyze documents using Mistral AI via Hugging Face",
+    description="Extract and analyze documents using Claude AI via Anthropic",
     version="1.0.0"
 )
 
-# Configure CORS for React frontend on localhost:3000, 3001, 3002
+# Configure CORS for React frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://localhost:3001", "http://localhost:3002", "http://localhost:5173", "http://127.0.0.1:3000"],
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

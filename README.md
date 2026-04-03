@@ -2,9 +2,9 @@
 
 A full-stack web application that uses **Claude AI** to intelligently extract and analyze documents. Upload a PDF, Word document, or image, and get structured insights including document type, key fields, summary, and tabular data.
 
-**Built for:** GUVI x HCL Hackathon
 
----
+
+--
 
 ## 📋 Features
 
@@ -46,11 +46,21 @@ A full-stack web application that uses **Claude AI** to intelligently extract an
 ### Backend
 - **Python 3.8+** — Programming language
 - **FastAPI** — Web framework
-- **Anthropic Claude API** — AI model (claude-sonnet-4-20250514)
+- **Hugging Face Transformers** — Pre-trained NLP models for document analysis
 - **PyMuPDF** — PDF text extraction
 - **pdfplumber** — Advanced PDF parsing
 - **python-docx** — Word document parsing
 - **Pillow** — Image processing
+
+---
+
+## 🤖 AI-Tools Used
+
+- **Hugging Face Transformers** — Pre-trained machine learning models for NLP tasks
+  - Leverages state-of-the-art transformer models for document analysis
+  - Supports multiple pre-trained models for text classification and extraction
+  - Efficient processing with GPU/CPU support via PyTorch
+  - Free and open-source model ecosystem
 
 ---
 
@@ -176,7 +186,27 @@ Visit **http://localhost:3000** and start uploading documents!
 
 ---
 
-## 📖 How to Use
+## � Deployment (Render.com)
+
+Ready to share your app with the world? Deploy to Render for free!
+
+### Quick Deploy
+
+1. **Get your Anthropic API key** from [console.anthropic.com](https://console.anthropic.com/)
+2. **Push to GitHub** — see [DEPLOYMENT.md](DEPLOYMENT.md)
+3. **Deploy Backend** — see [DEPLOYMENT.md](DEPLOYMENT.md)
+4. **Deploy Frontend** — see [DEPLOYMENT.md](DEPLOYMENT.md)
+
+### Live Links (After Deployment)
+- **Frontend:** `https://document-ai-frontend.onrender.com`
+- **Backend API:** `https://document-ai-backend.onrender.com`
+- **API Docs:** `https://document-ai-backend.onrender.com/docs`
+
+📖 **Full deployment guide:** [DEPLOYMENT.md](DEPLOYMENT.md)
+
+---
+
+## �📖 How to Use
 
 1. **Upload a Document**
    - Drag and drop a file onto the upload area

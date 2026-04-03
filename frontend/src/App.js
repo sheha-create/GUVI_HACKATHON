@@ -10,8 +10,8 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // API endpoint
-  const API_URL = 'http://localhost:8000';
+  // API endpoint - use environment variable or default to localhost
+  const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
 
   // Handle file drop
   const onDrop = useCallback((acceptedFiles) => {
