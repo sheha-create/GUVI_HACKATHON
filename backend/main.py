@@ -5,10 +5,8 @@ Handles file uploads, text extraction, and AI-powered document analysis.
 
 import os
 import tempfile
-import shutil
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 from typing import Dict, Any, Optional
 import logging
@@ -17,23 +15,47 @@ from dotenv import load_dotenv
 # Load environment variables from .env file
 load_dotenv()
 
-# Get frontend URL from environment for CORS
-FRONTEND_URL = os.getenv('FRONTEND_URL', 'http://localhost:3000')
-RENDER_EXTERNAL_URL = os.getenv('RENDER_EXTERNAL_URL', '')
+# Get frontend origins from environment for CORS
+FRONTEND_URL = os.getenv("FRONTEND_URL", "")
+RENDER_EXTERNAL_URL = os.getenv("RENDER_EXTERNAL_URL", "")
+VERCEL_URL = os.getenv("VERCEL_URL", "")
+ADDITIONAL_ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "")
 
-# Build list of allowed origins
-allowed_origins = [
+
+def _normalize_origin(url: str) -> Optional[str]:
+    """Normalize origin values and ignore blanks."""
+    if not url:
+        return None
+
+    cleaned = url.strip().rstrip("/")
+    if not cleaned:
+        return None
+
+    if cleaned.startswith(("http://", "https://")):
+        return cleaned
+
+    return f"https://{cleaned}"
+
+
+allowed_origins = []
+candidate_origins = [
     "http://localhost:3000",
     "http://localhost:3001",
     "http://localhost:3002",
     "http://localhost:5173",
     "http://127.0.0.1:3000",
-    FRONTEND_URL
+    "https://doc-analyzer-ai.onrender.com",
+    FRONTEND_URL,
+    RENDER_EXTERNAL_URL,
+    VERCEL_URL,
 ]
 
-# Add Render external URL if available
-if RENDER_EXTERNAL_URL:
-    allowed_origins.append(RENDER_EXTERNAL_URL)
+candidate_origins.extend(ADDITIONAL_ALLOWED_ORIGINS.split(","))
+
+for origin in candidate_origins:
+    normalized_origin = _normalize_origin(origin)
+    if normalized_origin and normalized_origin not in allowed_origins:
+        allowed_origins.append(normalized_origin)
 
 from utils.parser import parse_document, validate_file_type
 from utils.ai_extractor import process_document

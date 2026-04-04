@@ -1,10 +1,9 @@
 # 🤖 AI-Powered Document Analysis Web Application
 
-A full-stack web application that uses **Claude AI** to intelligently extract and analyze documents. Upload a PDF, Word document, or image, and get structured insights including document type, key fields, summary, and tabular data.
+A full-stack web application that used to intelligently extract and analyze documents. Upload a PDF, Word document, or image, and get structured insights including document type, key fields, summary, and tabular data.
 
 
 
---
 
 ## 📋 Features
 
@@ -94,15 +93,15 @@ document-ai/
 
 - **Python 3.8+** (for backend)
 - **Node.js 14+** (for frontend)
-- **Anthropic API Key** (get it free from https://console.anthropic.com/)
 
-### Step 1: Get Your Anthropic API Key
 
-1. Visit [console.anthropic.com](https://console.anthropic.com/)
+### Step 1: Get Your  API Key
+
+1. Visit hugging face
 2. Sign up or log in
 3. Navigate to API Keys section
 4. Create a new API key
-5. Copy the key (starts with `sk-ant-...`)
+5. Copy the key (starts with `sk-...`)
 
 ### Step 2: Setup Backend
 
@@ -198,9 +197,9 @@ Ready to share your app with the world? Deploy to Render for free!
 4. **Deploy Frontend** — see [DEPLOYMENT.md](DEPLOYMENT.md)
 
 ### Live Links (After Deployment)
-- **Frontend:** `https://document-ai-frontend.onrender.com`
-- **Backend API:** `https://document-ai-backend.onrender.com`
-- **API Docs:** `https://document-ai-backend.onrender.com/docs`
+- **Frontend:** Deploy on Vercel using `frontend/`
+- **Backend API:** `https://doc-analyzer-ai.onrender.com`
+- **API Docs:** `https://doc-analyzer-ai.onrender.com/docs`
 
 📖 **Full deployment guide:** [DEPLOYMENT.md](DEPLOYMENT.md)
 

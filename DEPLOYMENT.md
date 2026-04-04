@@ -1,6 +1,6 @@
-# 🚀 Deployment Guide - Render
+# 🚀 Deployment Guide - Render + Vercel
 
-This guide walks you through deploying the AI Document Analysis application to Render.com for free.
+This guide walks you through deploying the backend to Render and the frontend to Vercel.
 
 ---
 
@@ -38,7 +38,7 @@ The frontend is already configured to use the `REACT_APP_API_URL` environment va
 
 ```javascript
 // frontend/src/App.js
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+const API_URL = process.env.REACT_APP_API_URL || 'https://doc-analyzer-ai.onrender.com';
 ```
 
 ---
@@ -73,49 +73,52 @@ In the Render dashboard for the backend service:
 
 3. Add another variable:
    - **Key:** `FRONTEND_URL`
-   - **Value:** `https://document-ai-frontend.onrender.com` (you'll create frontend next)
+   - **Value:** `https://your-vercel-project.vercel.app`
+
+4. Optional for preview deployments:
+   - **Key:** `ALLOWED_ORIGINS`
+   - **Value:** `https://your-vercel-project.vercel.app,https://your-preview-url.vercel.app`
 
 ### 2.3 Deploy
 
 Click **"Create Web Service"** and wait for deployment (2-5 minutes).
 
-**Note the Backend URL:** It will be something like `https://document-ai-backend.onrender.com`
+**Backend URL:** `https://doc-analyzer-ai.onrender.com`
 
 ---
 
-## 🎨 Step 3: Deploy Frontend on Render
+## 🎨 Step 3: Deploy Frontend on Vercel
 
 ### 3.1 Create Frontend Service
 
-1. Go to [render.com](https://render.com) dashboard
-2. Click **"New +"** → **"Web Service"**
-3. Select the same GitHub repository
-4. Configure the service:
+1. Go to [vercel.com](https://vercel.com) and sign in
+2. Click **"Add New..."** → **"Project"**
+3. Import the same GitHub repository
+4. Configure the project:
 
 **Service Configuration:**
 ```
-Name:                  document-ai-frontend
-Environment:           Node
-Build Command:         cd frontend && npm install && npm run build
-Start Command:         cd frontend && npm run start
-Root Directory:        (leave empty - it will use project root)
-Plan:                  Free
+Framework Preset:      Other
+Install Command:       cd frontend && npm install
+Build Command:         cd frontend && npm run build
+Output Directory:      frontend/build
+Root Directory:        (leave empty)
 ```
 
 ### 3.2 Add Environment Variables
 
-In the Render dashboard for the frontend service:
+In the Vercel dashboard for the frontend project:
 
 1. Click **"Environment"** tab
 2. Add this variable:
    - **Key:** `REACT_APP_API_URL`
-   - **Value:** `https://document-ai-backend.onrender.com`
+   - **Value:** `https://doc-analyzer-ai.onrender.com`
 
 ### 3.3 Deploy
 
-Click **"Create Web Service"** and wait for deployment (3-7 minutes).
+Click **"Deploy"** and wait for deployment.
 
-**Note the Frontend URL:** It will be something like `https://document-ai-frontend.onrender.com`
+**Note the Frontend URL:** It will be something like `https://your-vercel-project.vercel.app`
 
 ---
 
@@ -123,7 +126,7 @@ Click **"Create Web Service"** and wait for deployment (3-7 minutes).
 
 ### 4.1 Check Backend Health
 
-Visit: `https://document-ai-backend.onrender.com/health`
+Visit: `https://doc-analyzer-ai.onrender.com/health`
 
 Expected response:
 ```json
@@ -132,7 +135,7 @@ Expected response:
 
 ### 4.2 Check Frontend
 
-Visit: `https://document-ai-frontend.onrender.com`
+Visit your Vercel frontend URL, for example: `https://your-vercel-project.vercel.app`
 
 You should see the upload interface.
 
@@ -150,15 +153,16 @@ After creating both services, update the environment variables:
 
 ### For Backend Service:
 Go to **Environment** and update:
-- **FRONTEND_URL:** `https://document-ai-frontend.onrender.com`
+- **FRONTEND_URL:** `https://your-vercel-project.vercel.app`
+- **ALLOWED_ORIGINS:** Add any preview domains if you want Vercel preview deployments to work with CORS
 
-### For Frontend Service:
-Go to **Environment** and update:
-- **REACT_APP_API_URL:** `https://document-ai-backend.onrender.com`
+### For Frontend Project:
+Go to **Environment Variables** and confirm:
+- **REACT_APP_API_URL:** `https://doc-analyzer-ai.onrender.com`
 
-Then redeploy both services:
-1. Go to each service's **Deployments** tab
-2. Click the **"Redeploy"** button next to the latest deployment
+Then redeploy both:
+1. Redeploy the backend on Render if you changed CORS variables
+2. Redeploy the frontend on Vercel if you changed `REACT_APP_API_URL`
 
 ---
 
@@ -166,9 +170,9 @@ Then redeploy both services:
 
 After successful deployment:
 
-- **Frontend:** `https://document-ai-frontend.onrender.com`
-- **Backend API:** `https://document-ai-backend.onrender.com`
-- **API Docs:** `https://document-ai-backend.onrender.com/docs`
+- **Frontend:** `https://your-vercel-project.vercel.app`
+- **Backend API:** `https://doc-analyzer-ai.onrender.com`
+- **API Docs:** `https://doc-analyzer-ai.onrender.com/docs`
 
 ---
 

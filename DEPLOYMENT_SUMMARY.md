@@ -1,6 +1,6 @@
 # 🎉 Deployment Ready - Quick Summary
 
-Your AI Document Analysis application is now configured for deployment on Render!
+Your AI Document Analysis application is now configured for a Render backend and a Vercel frontend.
 
 ## ✅ What's Been Set Up
 
@@ -41,13 +41,14 @@ git push -u origin main
 - **Add Environment Variable:**
   - `ANTHROPIC_API_KEY` = your API key (get from https://console.anthropic.com/)
 
-### 3. Deploy Frontend Service
-- Same process: New Web Service
-- **Root Directory:** (leave empty)
-- **Build Command:** `cd frontend && npm install && npm run build`
-- **Start Command:** `cd frontend && npm run start`
+### 3. Deploy Frontend on Vercel
+- Go to [vercel.com](https://vercel.com)
+- Import your GitHub repository
+- **Install Command:** `cd frontend && npm install`
+- **Build Command:** `cd frontend && npm run build`
+- **Output Directory:** `frontend/build`
 - **Add Environment Variable:**
-  - `REACT_APP_API_URL` = your backend URL (e.g., https://document-ai-backend.onrender.com)
+  - `REACT_APP_API_URL` = `https://doc-analyzer-ai.onrender.com`
 
 ### 4. Test Your Deployment
 - Visit your frontend URL
@@ -59,9 +60,9 @@ git push -u origin main
 ## 🌐 Expected Live URLs (after deployment)
 
 ```
-Frontend:  https://document-ai-frontend.onrender.com
-Backend:   https://document-ai-backend.onrender.com
-API Docs:  https://document-ai-backend.onrender.com/docs
+Frontend:  https://your-vercel-project.vercel.app
+Backend:   https://doc-analyzer-ai.onrender.com
+API Docs:  https://doc-analyzer-ai.onrender.com/docs
 ```
 
 ---
@@ -77,12 +78,13 @@ For detailed instructions with screenshots and troubleshooting, see: **[DEPLOYME
 ### Backend (.env)
 ```env
 ANTHROPIC_API_KEY=sk-ant-xxxxxxxxxxxxx  # Required!
-FRONTEND_URL=https://document-ai-frontend.onrender.com
+FRONTEND_URL=https://your-vercel-project.vercel.app
+ALLOWED_ORIGINS=https://your-vercel-project.vercel.app,https://your-preview-url.vercel.app
 ```
 
 ### Frontend
 ```env
-REACT_APP_API_URL=https://document-ai-backend.onrender.com
+REACT_APP_API_URL=https://doc-analyzer-ai.onrender.com
 ```
 
 ---

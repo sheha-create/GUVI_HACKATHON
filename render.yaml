@@ -16,15 +16,3 @@ services:
         value: 3.11
       - key: ANTHROPIC_API_KEY
         sync: false
-
-  # Frontend React Service
-  - type: web
-    name: document-ai-frontend
-    runtime: node
-    buildCommand: |
-      cd frontend && npm install && npm run build
-    startCommand: cd frontend && npm run start
-    plan: free
-    envVars:
-      - key: REACT_APP_API_URL
-        value: https://document-ai-backend.onrender.com
