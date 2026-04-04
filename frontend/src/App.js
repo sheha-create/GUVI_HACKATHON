@@ -10,34 +10,14 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // API endpoint - use environment variable or fall back to the hosted backend
-  const API_URL = process.env.REACT_APP_API_URL || 'https://doc-analyzer-ai.onrender.com';
-
-  // Handle file drop
-  const onDrop = useCallback((acceptedFiles) => {
-    if (acceptedFiles.length > 0) {
-      const file = acceptedFiles[0];
-      setUploadedFile(file);
-      setError(null);
-      // Auto-analyze on drop
-      analyzeFile(file);
-    }
-  }, []);
-
-  // Configure dropzone
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    onDrop,
-    accept: {
-      'application/pdf': ['.pdf'],
-      'application/vnd.openxmlformats-officedocument.wordprocessingml.document': ['.docx'],
-      'image/jpeg': ['.jpg', '.jpeg'],
-      'image/png': ['.png']
-    },
-    multiple: false
-  });
+  // Support both Netlify and CRA-style env var names, with a hosted fallback.
+  const API_URL =
+    process.env.REACT_APP_BACKEND_URL ||
+    process.env.REACT_APP_API_URL ||
+    'https://doc-analyzer-ai.onrender.com';
 
   // Analyze file with backend API
-  const analyzeFile = async (file) => {
+  const analyzeFile = useCallback(async (file) => {
     setLoading(true);
     setError(null);
     setAnalysisResult(null);
@@ -64,7 +44,29 @@ function App() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [API_URL]);
+
+  // Handle file drop
+  const onDrop = useCallback((acceptedFiles) => {
+    if (acceptedFiles.length > 0) {
+      const file = acceptedFiles[0];
+      setUploadedFile(file);
+      setError(null);
+      analyzeFile(file);
+    }
+  }, [analyzeFile]);
+
+  // Configure dropzone
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    accept: {
+      'application/pdf': ['.pdf'],
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document': ['.docx'],
+      'image/jpeg': ['.jpg', '.jpeg'],
+      'image/png': ['.png']
+    },
+    multiple: false
+  });
 
   // Download results as JSON
   const downloadJSON = () => {
