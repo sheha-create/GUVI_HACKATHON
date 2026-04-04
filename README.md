@@ -197,7 +197,7 @@ Ready to share your app with the world? Deploy to Render for free!
 4. **Deploy Frontend** — see [DEPLOYMENT.md](DEPLOYMENT.md)
 
 ### Live Links (After Deployment)
-- **Frontend:** Deploy on Vercel using `frontend/`
+- **Frontend:** `https://documentanalyzera.netlify.app`
 - **Backend API:** `https://doc-analyzer-ai.onrender.com`
 - **API Docs:** `https://doc-analyzer-ai.onrender.com/docs`
 

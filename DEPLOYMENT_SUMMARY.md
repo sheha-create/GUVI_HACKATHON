@@ -1,6 +1,6 @@
 # 🎉 Deployment Ready - Quick Summary
 
-Your AI Document Analysis application is now configured for a Render backend and a Vercel frontend.
+Your AI Document Analysis application is now configured for a Render backend and a Netlify frontend.
 
 ## ✅ What's Been Set Up
 
@@ -41,12 +41,12 @@ git push -u origin main
 - **Add Environment Variable:**
   - `ANTHROPIC_API_KEY` = your API key (get from https://console.anthropic.com/)
 
-### 3. Deploy Frontend on Vercel
-- Go to [vercel.com](https://vercel.com)
+### 3. Deploy Frontend on Netlify
+- Go to [netlify.com](https://netlify.com)
 - Import your GitHub repository
-- **Install Command:** `cd frontend && npm install`
-- **Build Command:** `cd frontend && npm run build`
-- **Output Directory:** `frontend/build`
+- **Base directory:** `frontend`
+- **Build command:** `npm run build`
+- **Publish directory:** `build`
 - **Add Environment Variable:**
   - `REACT_APP_API_URL` = `https://doc-analyzer-ai.onrender.com`
 
@@ -60,7 +60,7 @@ git push -u origin main
 ## 🌐 Expected Live URLs (after deployment)
 
 ```
-Frontend:  https://your-vercel-project.vercel.app
+Frontend:  https://documentanalyzera.netlify.app
 Backend:   https://doc-analyzer-ai.onrender.com
 API Docs:  https://doc-analyzer-ai.onrender.com/docs
 ```
@@ -78,8 +78,8 @@ For detailed instructions with screenshots and troubleshooting, see: **[DEPLOYME
 ### Backend (.env)
 ```env
 ANTHROPIC_API_KEY=sk-ant-xxxxxxxxxxxxx  # Required!
-FRONTEND_URL=https://your-vercel-project.vercel.app
-ALLOWED_ORIGINS=https://your-vercel-project.vercel.app,https://your-preview-url.vercel.app
+FRONTEND_URL=https://documentanalyzera.netlify.app
+ALLOWED_ORIGINS=https://documentanalyzera.netlify.app
 ```
 
 ### Frontend

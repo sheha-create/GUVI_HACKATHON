@@ -16,7 +16,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Get frontend origins from environment for CORS
-FRONTEND_URL = os.getenv("FRONTEND_URL", "")
+FRONTEND_URL = os.getenv("FRONTEND_URL", "https://documentanalyzera.netlify.app")
 RENDER_EXTERNAL_URL = os.getenv("RENDER_EXTERNAL_URL", "")
 VERCEL_URL = os.getenv("VERCEL_URL", "")
 ADDITIONAL_ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "")

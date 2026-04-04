@@ -1,6 +1,6 @@
-# 🚀 Deployment Guide - Render + Vercel
+# 🚀 Deployment Guide - Render + Netlify
 
-This guide walks you through deploying the backend to Render and the frontend to Vercel.
+This guide walks you through deploying the backend to Render and the frontend to Netlify.
 
 ---
 
@@ -73,11 +73,11 @@ In the Render dashboard for the backend service:
 
 3. Add another variable:
    - **Key:** `FRONTEND_URL`
-   - **Value:** `https://your-vercel-project.vercel.app`
+   - **Value:** `https://documentanalyzera.netlify.app`
 
 4. Optional for preview deployments:
    - **Key:** `ALLOWED_ORIGINS`
-   - **Value:** `https://your-vercel-project.vercel.app,https://your-preview-url.vercel.app`
+   - **Value:** `https://documentanalyzera.netlify.app`
 
 ### 2.3 Deploy
 
@@ -87,27 +87,25 @@ Click **"Create Web Service"** and wait for deployment (2-5 minutes).
 
 ---
 
-## 🎨 Step 3: Deploy Frontend on Vercel
+## 🎨 Step 3: Deploy Frontend on Netlify
 
 ### 3.1 Create Frontend Service
 
-1. Go to [vercel.com](https://vercel.com) and sign in
-2. Click **"Add New..."** → **"Project"**
+1. Go to [netlify.com](https://netlify.com) and sign in
+2. Click **"Add new site"** → **"Import an existing project"**
 3. Import the same GitHub repository
-4. Configure the project:
+4. Configure the site:
 
 **Service Configuration:**
 ```
-Framework Preset:      Other
-Install Command:       cd frontend && npm install
-Build Command:         cd frontend && npm run build
-Output Directory:      frontend/build
-Root Directory:        (leave empty)
+Base directory:        frontend
+Build command:         npm run build
+Publish directory:     build
 ```
 
 ### 3.2 Add Environment Variables
 
-In the Vercel dashboard for the frontend project:
+In the Netlify dashboard for the frontend site:
 
 1. Click **"Environment"** tab
 2. Add this variable:
@@ -116,9 +114,9 @@ In the Vercel dashboard for the frontend project:
 
 ### 3.3 Deploy
 
-Click **"Deploy"** and wait for deployment.
+Click **"Deploy site"** and wait for deployment.
 
-**Note the Frontend URL:** It will be something like `https://your-vercel-project.vercel.app`
+**Frontend URL:** `https://documentanalyzera.netlify.app`
 
 ---
 
@@ -135,7 +133,7 @@ Expected response:
 
 ### 4.2 Check Frontend
 
-Visit your Vercel frontend URL, for example: `https://your-vercel-project.vercel.app`
+Visit: `https://documentanalyzera.netlify.app`
 
 You should see the upload interface.
 
@@ -153,8 +151,8 @@ After creating both services, update the environment variables:
 
 ### For Backend Service:
 Go to **Environment** and update:
-- **FRONTEND_URL:** `https://your-vercel-project.vercel.app`
-- **ALLOWED_ORIGINS:** Add any preview domains if you want Vercel preview deployments to work with CORS
+- **FRONTEND_URL:** `https://documentanalyzera.netlify.app`
+- **ALLOWED_ORIGINS:** `https://documentanalyzera.netlify.app`
 
 ### For Frontend Project:
 Go to **Environment Variables** and confirm:
@@ -162,7 +160,7 @@ Go to **Environment Variables** and confirm:
 
 Then redeploy both:
 1. Redeploy the backend on Render if you changed CORS variables
-2. Redeploy the frontend on Vercel if you changed `REACT_APP_API_URL`
+2. Redeploy the frontend on Netlify if you changed `REACT_APP_API_URL`
 
 ---
 
@@ -170,7 +168,7 @@ Then redeploy both:
 
 After successful deployment:
 
-- **Frontend:** `https://your-vercel-project.vercel.app`
+- **Frontend:** `https://documentanalyzera.netlify.app`
 - **Backend API:** `https://doc-analyzer-ai.onrender.com`
 - **API Docs:** `https://doc-analyzer-ai.onrender.com/docs`
 
